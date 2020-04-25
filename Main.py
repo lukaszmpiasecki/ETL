@@ -36,6 +36,12 @@ def main():
         print("5 najpopularniejszych utworow to: \n")
         for i in result:
             print(i)
+        db_cursor.execute(
+            'SELECT ART FROM (SELECT ART, COUNT(*) FROM TABELA1 INNER JOIN TABELA2 ON TABELA1.ID_UTW = TABELA2.ID_UTW GROUP BY ART ORDER BY COUNT(*) DESC LIMIT 5)')
+        result = db_cursor.fetchmany(1)
+        print("Artysta z najwieksza iloscia odsluchan to: \n")
+        for i in result:
+            print(i)
     print("Czas: %.2f sekund." % (time.time() - t))
 
 
